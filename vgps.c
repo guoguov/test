@@ -2,6 +2,8 @@
 #include <unistd.h>
 
 #include "vgps.h"
+#include "driver_nmea0813.h"
+#include "utility.h"
 
 void gps_message_handler(int fd)
 {
@@ -13,6 +15,9 @@ void gps_message_handler(int fd)
 			perror("write");
 			break;
 		}
+		buf[n] = 0;
+		if (parse_nmea(buf) < 0)
+			LOGD("Error NMEA Message: %s", buf);
 	}
 	if (n < 0) 
 		perror("read");
