@@ -4,6 +4,7 @@
 
 #include "driver_nmea0813.h"
 #include "utility.h"
+#include "driver_ublox.h"
 
 #define FIELD_SIZ		32
 static char Fields[32][FIELD_SIZ];
@@ -434,8 +435,10 @@ int parse_nmea(const char *sentence)
 		return -1;
 	}
 	
-	if ((session.mask & LAT_LON_SET) || (session.mask & SV_INFO_SET)) {
+	if ((session.mask & LAT_LON_SET) || 
+		((session.mask & SV_INFO_SET) && (session.mask & SV_NUMBER_SET))) {
 		report_nmea(&session);
+		deliver_nmea(&session);
 		session.mask = 0;
 	}	
 		

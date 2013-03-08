@@ -33,6 +33,7 @@ struct nmea_message_t {
 	double spd_kph;
 	#define KNOT_2_KPH				1.852
 	#define KNOT_2_MPS				0.514444
+	#define KPH_2_MPS				0.277778
 	double cog;
 	
 	double PDOP;

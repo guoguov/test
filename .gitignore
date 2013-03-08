@@ -1,5 +1,8 @@
 *.o
 *.exe
 *.UBX
+*.log
 *.stackdump
+*.zip
+.gitignore
 ~*
